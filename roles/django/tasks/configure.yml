@@ -61,7 +61,7 @@
 
 - name: Adjust project settings
   template:
-    src: 'postgres_settings.j2'
+    src: 'postgres_settings.py.j2'
     dest: "/home/{{ project_user }}/{{ project_name }}/{{ project_name }}/settings.py"
 
 - name: Complete project setup
