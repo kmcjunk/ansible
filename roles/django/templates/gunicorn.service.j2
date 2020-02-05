@@ -9,7 +9,7 @@ User={{ project_user }}
 Group=nginx
 RuntimeDirectory=gunicorn
 WorkingDirectory=/home/{{ project_user }}/{{ project_name }}/
-ExecStart=/home/{{ project_user }}/{{ project_name }}/{{ project_name }}env/bin/gunicorn --pid /run/gunicorn/pid   \
+ExecStart=/home/{{ project_user }}/venvs/{{ project_name }}env/bin/gunicorn --pid /run/gunicorn/pid   \
           --bind unix:/run/gunicorn/socket {{ project_name }}.wsgi:application
 ExecReload=/bin/kill -s HUP $MAINPID
 ExecStop=/bin/kill -s TERM $MAINPID
