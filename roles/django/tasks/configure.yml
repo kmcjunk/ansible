@@ -37,6 +37,7 @@
   become_user: postgres
   postgresql_db:
     name: myproject
+    login_user: postgres
 
 
 #- name: Connect to acme database, create django user, and grant access to database and products table
