@@ -7,13 +7,13 @@
         password={{ password }}
         append=yes
 
-- name: Set permissions
-  become: true
-  become_user: "{{ project_user }}"
-  file:
-    path: /home/{{ project_user }}/
-    state: directory
-    mode: '710'
+# - name: Set permissions
+#   become: true
+#   become_user: "{{ project_user }}"
+#   file:
+#     path: /home/{{ project_user }}/
+#     state: directory
+#     mode: '710'
 
 - name: Initialize PostgreSQL
   command: service postgresql initdb
