@@ -43,7 +43,7 @@
     db: '{{ project_name }}'
     name: '{{ project_user }}'
     password: '{{ password }}'
-    priv: "ALL/ALL:ALL"
+    priv: "ALL:ALL"
     encrypted: yes
 
 - name: Create Django project
