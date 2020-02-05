@@ -35,7 +35,6 @@
 - name: Make project database
   postgresql_db:
     name: "{{ project_name }}"
-    login_password: "{{ password }}"
   become: true
   become_user: postgres
 
