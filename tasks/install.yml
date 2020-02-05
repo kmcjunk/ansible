@@ -1,0 +1,25 @@
+- name: Install NGINX and development packages
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - python-pip
+    - python-devel
+    - postgresql-server
+    - postgresql-devel
+    - postgresql-contrib
+    - gcc
+    - nginx
+  when: ansible_os_family == 'RedHat'
+
+- name: Install virtualenv
+  pip:
+    - virtualenv
+
+- name: Install PIP packages
+  pip:
+    name:
+      - django
+      - gunicorn
+      - psycopg2
+    virtualenv: /home/{{ project_user }}/venvs/{{ project_name }}env

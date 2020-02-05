@@ -1,0 +1,96 @@
+---
+
+- name: Create project user
+  user: name={{ project_user }}
+        group=nginx
+        shell=/bin/bash
+        password={{ password }}
+        groups=sudo
+        append=yes
+
+- name: Set permissions
+  file:
+    path: /home/{{ project_user }}/
+    state: directory
+    mode: '0710'
+
+- name: Initialize PostgreSQL
+  command: service postgresql initdb
+
+- name: Start PostgreSQL
+  service:
+    name: postgresql
+    state: started
+    enabled: yes
+
+- name: Configure PostgreSQL
+  template:
+    src: 'RedHat/pg_hba.conf.j2'
+    dest: "/var/lib/pgsql/data/pg_hba.conf"
+  when: ansible_os_family == 'RedHat'
+
+- name: Restart PostgreSQL
+  service:
+    name: postgresql
+    state: restarted
+
+- name: Create database
+  postgresql_db:
+    name: myproject
+
+#- name: Connect to acme database, create django user, and grant access to database and products table
+- name: Configure database
+  postgresql_user:
+    db: {{ project_name }}
+    name: {{ project_user }}
+    password: {{ password }}
+    priv: "ALL/ALL:ALL"
+    encrypted: yes
+
+- name: Create Django project
+  command: django-admin.py startproject myproject .
+
+- name: Adjust project settings
+  template:
+    src: 'RedHat/postgres_settings.j2'
+    dest: "/home/{{ project_user }}/{{ project_name }}/{{ project_name }}/settings.py"
+
+- name: Complete project setup
+  command: "{{ item }}"
+  with_items:
+    - /home/{{ project_user }}/{{ project_name }}/manage.py makemigrations
+    - /home/{{ project_user }}/{{ project_name }}/manage.py migrate
+
+- name: Create superuser
+  django_manage:
+    command: "createsuperuser --noinput --username={{ project_user }} --email=admin@example.com"
+    app_path: "/home/{{ project_user }}/{{ project_name }}/"
+
+- name: Collect static content
+  django_manage:
+    command: collectstatic
+    app_path: "/home/{{ project_user }}/{{ project_name }}/"
+
+- name: Create Gunicorn service
+  template:
+    src: 'RedHat/gunicorn.service.j2'
+    dest: "/etc/systemd/system/gunicorn.service"
+  when: ansible_os_family == 'RedHat'
+
+- name: Start Gunicorn
+  service:
+    name: gunicorn
+    state: started
+    enabled: yes
+
+- name: Configure NGINX
+  template:
+    src: 'RedHat/nginx.conf.j2'
+    dest: "/etc/nginx/nginx.conf"
+  when: ansible_os_family == 'RedHat'
+
+- name: Start NGINX
+  service:
+    name: nginx
+    state: started
+    enabled: yes
