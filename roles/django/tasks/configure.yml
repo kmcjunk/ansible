@@ -33,10 +33,11 @@
     state: restarted
 
 - name: Create database
-  postgresql_db:
-    name: myproject
   become: true
   become_user: postgres
+  postgresql_db:
+    name: myproject
+
 
 #- name: Connect to acme database, create django user, and grant access to database and products table
 - name: Configure database
