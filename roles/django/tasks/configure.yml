@@ -53,8 +53,11 @@
     mode: '0710'
 
 - name: Create Django project
-  command: django-admin.py startproject {{ project_name }} /home/{{ project_user }}/{{ project_name }}
+  command: /home/{{ project_user }}/venvs/{{ project_name }}env/bin/django-admin.py startproject {{ project_name }} /home/{{ project_user }}/{{ project_name }}
   virtualenv: /home/{{ project_user }}/venvs/{{ project_name }}env
+# - name: Create Django project
+#   command: django-admin.py startproject {{ project_name }} /home/{{ project_user }}/{{ project_name }}
+#   virtualenv: /home/{{ project_user }}/venvs/{{ project_name }}env
 
 - name: Adjust project settings
   template:
