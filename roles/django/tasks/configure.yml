@@ -8,10 +8,12 @@
         append=yes
 
 - name: Set permissions
+  become: true
+  become_user: "{{ project_user }}"
   file:
     path: /home/{{ project_user }}/
     state: directory
-    mode: '0710'
+    mode: '710'
 
 - name: Initialize PostgreSQL
   command: service postgresql initdb
@@ -47,10 +49,12 @@
     encrypted: yes
 
 - name: Create project folder
+  become: true
+  become_user: "{{ project_user }}"
   file:
     path: /home/{{ project_user }}/{{ project_name }}
     state: directory
-    mode: '0710'
+    mode: '710'
 
 - name: Create Django project
   command: /home/{{ project_user }}/venvs/{{ project_name }}env/bin/django-admin.py startproject {{ project_name }} /home/{{ project_user }}/{{ project_name }}
