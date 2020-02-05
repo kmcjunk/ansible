@@ -74,11 +74,13 @@
   django_manage:
     command: "createsuperuser --noinput --username={{ project_user }} --email=admin@example.com"
     app_path: "/home/{{ project_user }}/{{ project_name }}/"
+    virtualenv: /home/{{ project_user }}/venvs/{{ project_name }}env
 
 - name: Collect static content
   django_manage:
     command: collectstatic
     app_path: "/home/{{ project_user }}/{{ project_name }}/"
+    virtualenv: /home/{{ project_user }}/venvs/{{ project_name }}env
 
 - name: Create Gunicorn service
   template:
