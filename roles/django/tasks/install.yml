@@ -11,13 +11,13 @@
     - gcc
     - nginx
 
-- name: Install virtualenv
+- name: Install required python packages
   pip:
     name:
       - virtualenv
       - psycopg2
 
-- name: Install PIP packages
+- name: Install required django packages
   pip:
     name:
       - django
