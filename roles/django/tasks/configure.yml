@@ -32,11 +32,11 @@
     name: postgresql
     state: restarted
 
-  - name: Make project database
-    postgresql_db:
-      name: "{{ project_name }}"
-    become: true
-    become_user: postgres
+- name: Make project database
+  postgresql_db:
+    name: "{{ project_name }}"
+  become: true
+  become_user: postgres
 
 - name: Configure database
   postgresql_user:
