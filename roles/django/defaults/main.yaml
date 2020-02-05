@@ -3,3 +3,4 @@ project_name: myproject
 password: password
 server_ip: 104.239.174.135
 domain: example.com
+email: email@address.com

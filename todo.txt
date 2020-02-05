@@ -1,0 +1,3 @@
+use ansible to pull ipv4
+revert to nginx
+fix redundant paths in home
