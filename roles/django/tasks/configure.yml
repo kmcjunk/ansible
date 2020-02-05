@@ -19,7 +19,7 @@
 - name: Start PostgreSQL
   service:
     name: postgresql
-    state: started
+    state: restarted
     enabled: yes
 
 - name: Configure PostgreSQL
@@ -91,7 +91,7 @@
 - name: Start Gunicorn
   service:
     name: gunicorn
-    state: started
+    state: restarted
     enabled: yes
 
 - name: Configure NGINX
@@ -102,5 +102,5 @@
 - name: Start NGINX
   service:
     name: nginx
-    state: started
+    state: restarted
     enabled: yes
