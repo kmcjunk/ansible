@@ -13,7 +13,8 @@
 
 - name: Install virtualenv
   pip:
-    - virtualenv
+    name:
+      - virtualenv
 
 - name: Install PIP packages
   pip:

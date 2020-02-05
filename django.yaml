@@ -1,0 +1,5 @@
+- name: Install and configure Django
+  hosts: localhost
+  connection: local
+  roles:
+  - django
