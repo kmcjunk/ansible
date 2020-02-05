@@ -15,6 +15,7 @@
   pip:
     name:
       - virtualenv
+      - psycopg2
 
 - name: Install PIP packages
   pip:
