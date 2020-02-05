@@ -66,10 +66,9 @@
 
 - name: Complete project setup
   command: "{{ item }}"
-  virtualenv: /home/{{ project_user }}/venvs/{{ project_name }}env
   with_items:
-    - /home/{{ project_user }}/{{ project_name }}/manage.py makemigrations
-    - /home/{{ project_user }}/{{ project_name }}/manage.py migrate
+    - /home/{{ project_user }}/venvs/myprojectenv/bin/python /home/{{ project_user }}/{{ project_name }}/manage.py makemigrations
+    - /home/{{ project_user }}/venvs/myprojectenv/bin/python /home/{{ project_user }}/{{ project_name }}/manage.py migrate
 
 
 - name: Create superuser
