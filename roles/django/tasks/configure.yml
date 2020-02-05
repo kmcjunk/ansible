@@ -66,10 +66,11 @@
 
 - name: Complete project setup
   command: "{{ item }}"
+  virtualenv: /home/{{ project_user }}/venvs/{{ project_name }}env
   with_items:
     - /home/{{ project_user }}/{{ project_name }}/manage.py makemigrations
     - /home/{{ project_user }}/{{ project_name }}/manage.py migrate
-  virtualenv: /home/{{ project_user }}/venvs/{{ project_name }}env
+
 
 - name: Create superuser
   django_manage:
