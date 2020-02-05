@@ -5,7 +5,6 @@
         group=nginx
         shell=/bin/bash
         password={{ password }}
-        groups=sudo
         append=yes
 
 - name: Set permissions
@@ -25,7 +24,7 @@
 
 - name: Configure PostgreSQL
   template:
-    src: 'RedHat/pg_hba.conf.j2'
+    src: 'pg_hba.conf.j2'
     dest: "/var/lib/pgsql/data/pg_hba.conf"
 
 - name: Restart PostgreSQL
@@ -51,7 +50,7 @@
 
 - name: Adjust project settings
   template:
-    src: 'RedHat/postgres_settings.j2'
+    src: 'postgres_settings.j2'
     dest: "/home/{{ project_user }}/{{ project_name }}/{{ project_name }}/settings.py"
 
 - name: Complete project setup
@@ -72,7 +71,7 @@
 
 - name: Create Gunicorn service
   template:
-    src: 'RedHat/gunicorn.service.j2'
+    src: 'gunicorn.service.j2'
     dest: "/etc/systemd/system/gunicorn.service"
 
 - name: Start Gunicorn
@@ -83,7 +82,7 @@
 
 - name: Configure NGINX
   template:
-    src: 'RedHat/nginx.conf.j2'
+    src: 'nginx.conf.j2'
     dest: "/etc/nginx/nginx.conf"
 
 - name: Start NGINX
