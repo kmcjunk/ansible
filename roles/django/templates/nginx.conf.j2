@@ -37,7 +37,7 @@ http {
 
 server {
     listen 80;
-    server_name 162.242.218.232;
+    server_name {{ server_ip }};
 
     location = /favicon.ico { access_log off; log_not_found off; }
     location /static/ {
