@@ -46,6 +46,12 @@
     priv: "ALL"
     encrypted: yes
 
+- name: Create project folder
+  file:
+    path: /home/{{ project_user }}/{{ project_name }}
+    state: directory
+    mode: '0710'
+
 - name: Create Django project
   command: django-admin.py startproject myproject .
 
