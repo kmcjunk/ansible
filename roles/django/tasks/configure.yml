@@ -13,7 +13,7 @@
     state: directory
     mode: '710'
     owner: "{{ project_user }}"
-    group: "{{ project_user }}"
+    group: "nginx"
 
 - name: Initialize PostgreSQL
   command: service postgresql initdb
