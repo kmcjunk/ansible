@@ -27,7 +27,6 @@
   template:
     src: 'RedHat/pg_hba.conf.j2'
     dest: "/var/lib/pgsql/data/pg_hba.conf"
-  when: ansible_os_family == 'RedHat'
 
 - name: Restart PostgreSQL
   service:
@@ -75,7 +74,6 @@
   template:
     src: 'RedHat/gunicorn.service.j2'
     dest: "/etc/systemd/system/gunicorn.service"
-  when: ansible_os_family == 'RedHat'
 
 - name: Start Gunicorn
   service:
@@ -87,7 +85,6 @@
   template:
     src: 'RedHat/nginx.conf.j2'
     dest: "/etc/nginx/nginx.conf"
-  when: ansible_os_family == 'RedHat'
 
 - name: Start NGINX
   service:
