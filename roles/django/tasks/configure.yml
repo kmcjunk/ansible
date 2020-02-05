@@ -40,9 +40,9 @@
 #- name: Connect to acme database, create django user, and grant access to database and products table
 - name: Configure database
   postgresql_user:
-    db: {{ project_name }}
-    name: {{ project_user }}
-    password: {{ password }}
+    db: '{{ project_name }}'
+    name: '{{ project_user }}'
+    password: '{{ password }}'
     priv: "ALL/ALL:ALL"
     encrypted: yes
 
